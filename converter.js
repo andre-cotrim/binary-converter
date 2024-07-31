@@ -3,7 +3,7 @@ function converter(){
     var res = document.getElementById('resultado')
     var opcao = document.getElementById('opcoes').value 
     if(isNaN(value) || value == ''){
-        res.innerHTML ='Escreva um número válido'
+        res.innerHTML ='Escreva um número válido!'
     }else if (opcao=="decimal->binary"){
         var resultado = ""
         var num = parseInt(value,10)
@@ -17,7 +17,21 @@ function converter(){
         }  
         res.innerHTML=resultado.split('').reverse().join('')
     }else if (opcao=="binary->decimal"){
-        var num = parseInt(value,2)
+        if (isNaN(parseInt(value,2))){   
+            res.innerHTML ='Escreva um número válido!' 
+        }else{
+            var num = parseInt(value,2)
         res.innerHTML = num.toString()
+        }
+    }
+}
+function trocar(){
+    var opcao = document.getElementById('opcoes').value 
+    if (opcao=="binary->decimal"){
+        opcoes.value = "decimal->binary"
+        opcao = "decimal->binary"
+    }else if (opcao== "decimal->binary"){
+        opcoes.value = "binary->decimal"
+        opcao = "binary->decimal"
     }
 }
