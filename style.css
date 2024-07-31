@@ -1,4 +1,4 @@
-
+/* Reset básico para remover margens e paddings padrão */
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +14,6 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    margin: 0;
 }
 
 header {
@@ -31,13 +30,13 @@ header {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-input[type="text"] {
+input[type="text"], select {
     padding: 10px;
     font-size: 16px;
     border: 2px solid #4a90e2;
     border-radius: 5px;
-    margin-bottom: 20px;
-    width: calc(100% - 24px); /* Para compensar o padding */
+    margin: 10px 0;
+    width: calc(100% - 24px);
     max-width: 300px;
 }
 
@@ -50,6 +49,7 @@ input[type="button"] {
     background-color: #4a90e2;
     color: white;
     transition: background-color 0.3s ease;
+    margin-top: 20px;
 }
 
 input[type="button"]:hover {
