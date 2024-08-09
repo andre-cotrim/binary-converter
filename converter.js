@@ -31,7 +31,8 @@ function converter(){
         }
     }else if (option1=="binary"){
         for (var i=0;i<value.length;i++){
-            if(parseInt(value[i])>2){resultado+=to_binary(value[i])   
+            resultado+=to_binary(value[i])   
+            if(parseInt(value[i])>2){
                 res.innerHTML ='Escreva um número válido!'
                 return
             }
@@ -40,6 +41,12 @@ function converter(){
             res.innerHTML = parseInt(value,2).toString()
         }
     }else if(option1=="octal"){
+        for (var i=0;i<value.length;i++){ 
+            if(parseInt(value[i])>7){
+                res.innerHTML ='Escreva um número válido!'
+                return
+            }
+        }
         if (option2=="binary"){
             var resultado =""
         for (var i=0;i<value.length;i++){
