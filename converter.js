@@ -1,3 +1,16 @@
+function to_binary(value){
+    var resultado = ""
+        var num = parseInt(value,10)
+        while (num>0){
+            if (num%2==0){
+                resultado+='0'
+            }else{
+                resultado+='1'
+            }
+    num = Math.floor(num/2)
+    }
+    return resultado
+}
 function converter(){
     var value = document.getElementById('resposta').value
     var res = document.getElementById('resultado')
@@ -11,31 +24,37 @@ function converter(){
     }
     if (option1==option2){
         res.innerHTML = 'Escolha opções válidas!'
+        return
     }else if (option1=="decimal"){
         if (option2=="binary"){
-            var resultado = ""
-            var num = parseInt(value,10)
-            while (num>0){
-                if (num%2==0){
-                    resultado+='0'
-                }else{
-                    resultado+='1'
-                }
-            num = Math.floor(num/2)
+        res.innerHTML=to_binary(value).split('').reverse().join('')
         }
-        res.innerHTML=resultado.split('').reverse().join('')
-    }
     }else if (option1=="binary"){
         for (var i=0;i<value.length;i++){
-            if(parseInt(value[i])>2){
+            if(parseInt(value[i])>2){resultado+=to_binary(value[i])   
                 res.innerHTML ='Escreva um número válido!'
                 return
             }
         }
         if (option2=="decimal"){
-                res.innerHTML = parseInt(value,2).toString()
-            }
+            res.innerHTML = parseInt(value,2).toString()
         }
+    }else if(option1=="octal"){
+        if (option2=="binary"){
+            var resultado =""
+        for (var i=0;i<value.length;i++){
+            resultado+=to_binary(value[i]).padStart(3,'0')    
+        }
+        res.innerHTML = resultado
+        return resultado
+        }if (option2=="decimal"){
+            var resultado = ""
+            for (var i=0;i<value.length;i++){
+                resultado+=to_binary(value[i]).padStart(3,'0')    
+            }
+            res.innerHTML = res.innerHTML = parseInt(resultado,2).toString()
+        }
+    }
 }
 
 function trocar(){
@@ -46,6 +65,7 @@ function trocar(){
     option1.value = tempValue2;
     option2.value = tempValue1;
 }
+
 /* function binary(value){
     var option2 = document.getElementById('option2').value 
     var num = parseInt(value,2)
