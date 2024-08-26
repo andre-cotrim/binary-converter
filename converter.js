@@ -12,13 +12,14 @@ function to_binary(value){
     return resultado
 }
 
-function to_octal(value){
+function to_octal_or_hexa(value,type){
     var resultado=""
-            for (var i=value.length-1;i>=0;i-=3){
-                if (i-3<0){
+            for (var i=value.length-1;i>=0;i-=type){
+                if (i-type<0){
                     resultado += parseInt(value.substring(0,i+1),2).toString().split('').reverse().join('')
+                    //if(parseInt(value.substring(0,i+1),2).toString().split('').reverse().join('')==)
                 }else{
-                    resultado += parseInt(value.substring(i-2,i+1),2).toString().split('').reverse().join('')
+                    resultado += parseInt(value.substring(i-type-1,i+1),2).toString().split('').reverse().join('')
                 }
             }
     return resultado.split('').reverse().join('')
@@ -33,7 +34,7 @@ function converter(){
     var option1 = document.getElementById('option1').value 
     var option2 = document.getElementById('option2').value 
     for (var i=0;i<value.length;i++){
-        if(isNaN(value[i] && option2!="hexa")){
+        if(isNaN(value[i] && option1!="hexa")){
             res.innerHTML ='Escreva um número válido!'
             return
         }
@@ -46,12 +47,13 @@ function converter(){
         res.innerHTML=to_binary(value).split('').reverse().join('')
         }else if (option2=="octal"){
             value = to_binary(value).split('').reverse().join('')
-            res.innerHTML = to_octal(value).toString() //undefined
+            res.innerHTML = to_octal_or_hexa(value,3).toString() 
+        }else if (option2=="hexa"){
+            value = to_binary(value).split('').reverse().join('')
+            res.innerHTML = to_octal_or_hexa(value,4).toString() 
         }
-        res.innerHTML = resultado
     }else if (option1=="binary"){
         for (var i=0;i<value.length;i++){
-            //resultado+=to_binary(value[i])   //decimal
             if(parseInt(value[i])>1){
                 res.innerHTML ='Escreva um número válido!'
                 return
@@ -60,7 +62,9 @@ function converter(){
         if (option2=="decimal"){
             res.innerHTML = parseInt(value,2).toString()
         }else if (option2=="octal"){
-            res.innerHTML = to_octal(value)
+            res.innerHTML = to_octal_or_hexa(value,3)
+        }else if(option2=="hexa"){
+            res.innerHTML = to_octal_or_hexa(value,4)
         }
     }else if(option1=="octal"){ //confirmar sempre se entra binario
         for (var i=0;i<value.length;i++){ 
@@ -76,15 +80,35 @@ function converter(){
         }
         res.innerHTML = resultado
         return resultado
-        }if (option2=="decimal"){
+        }else if (option2=="decimal"){
             var resultado = ""
             for (var i=0;i<value.length;i++){
                 resultado+=to_binary(value[i]).padStart(3,'0')    
             }
             res.innerHTML = parseInt(resultado,2).toString()
+        }else if(option2=="hexa"){
+
+        }
+    }else if (option1=="hexa"){
+        /* for (var i=0;i<value.length;i++){ 
+            if(value[i].toString<'a' && value[i].toString>'f'){ //letras maiores
+                res.innerHTML ='Escreva um número válido!'
+                return
+            }
+        } */
+        if (option2=="binary"){
+
+        }else if (option2=="decimal"){
+            var resultado = ""
+            for (var i=0;i<value.length;i++){
+                resultado+=to_binary(value[i]).padStart(4,'0')    
+            }
+            res.innerHTML = parseInt(resultado,2).toString()
+        }else if(option2=="octal"){
+
         }
     }
-}
+} //sinais
 
 function trocar(){
     var option1 = document.getElementById('option1');
